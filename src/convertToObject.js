@@ -10,19 +10,19 @@ function convertToObject(sourceString) {
     return {};
   }
 
-  const sourceArray = sourceString.split(';');
+  const styleDeclarations = sourceString.split(';');
 
-  const newArray = sourceArray
+  const stylePairs = styleDeclarations
     .filter((element) => element.includes(':'))
     .map((element) => {
-      const partsArray = element.split(':');
-      const key = partsArray[0].trim();
-      const value = partsArray[1].trim();
+      const propertyAndValue = element.split(':');
+      const key = propertyAndValue[0].trim();
+      const value = propertyAndValue[1].trim();
 
       return [key, value];
     });
 
-  return newArray.reduce((stylesObject, currentPair) => {
+  return stylePairs.reduce((stylesObject, currentPair) => {
     const [key, value] = currentPair;
 
     stylesObject[key] = value;
